@@ -6,17 +6,17 @@
 ```javascript
 const ByteArray = require('./bytearray');
 
-var byteArray = new ByteArray();
+var byteArray = new ByteArray(true);
 
 byteArray.setBigEndian();
 byteArray.setLittleEndian();
 byteArray.isBigEndian();
 byteArray.setLittleEndian();
 byteArray.bytesLength();
-byteArray.availableSize();
+byteArray.availLength();
 byteArray.position(0);
 byteArray.offset(0);
-byteArray.clearAll();
+byteArray.clear();
 
 
 byteArray.writeBool(true);
@@ -30,6 +30,15 @@ byteArray.writeString("World", 6);
 byteArray.writeBytes(new Uint8Array([1,2,3,4,5,6]));
 byteArray.writeUTFString('byte');
 byteArray.writeUTFString('array', 12);
+
+oldPos = byteArray.position();
+byteArray.position(0);
+byteArray.offset(2);
+byteArray.writeInt16(100);
+byteArray.offset(-2)
+byteArray.offset(-1)
+byteArray.writeInt8(90);
+byteArray.position(oldPos);
 
 console.log(byteArray.bytes().toString());
 
